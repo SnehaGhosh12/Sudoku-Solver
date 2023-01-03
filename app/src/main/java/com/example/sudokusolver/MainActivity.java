@@ -1,8 +1,11 @@
 package com.example.sudokusolver;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.AlertDialogLayout;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -87,5 +90,28 @@ public class MainActivity extends AppCompatActivity {
         public void run(){
             gameBoardSolver.solve(gameBoard);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        AlertDialog.Builder exitDialog = new AlertDialog.Builder(this);
+        exitDialog.setTitle("Exit?");
+        exitDialog.setMessage("Are you sure you want to exit?");
+        exitDialog.setIcon(R.drawable.ic_baseline_exit_to_app_24);
+
+        exitDialog.setPositiveButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        exitDialog.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                MainActivity.super.onBackPressed();
+            }
+        });
+        exitDialog.show();
     }
 }
